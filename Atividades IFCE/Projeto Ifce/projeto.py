@@ -11,29 +11,28 @@
 # Lojita: Função para listar (tela pra listar todos os produtos e informações (código(posição), preço, quantia no estoque))
 # Lojita: Tela Inicial.
 
-import funcoes
-r = funcoes.TelaInicial()
-while r != 0:
+import Funcoes
+
+
+while True:
+    r = Funcoes.TelaInicial()
     cont = 3
-    while r == 1:
-        senha = input('Senha:')
+    while r == "1":
+        senha = input("Senha: ")
         if senha == "40028922":
-            funcoes.Ação()
-        elif senha != "40028922":
+            Funcoes.Acao()
+            break
+        else:
             cont -= 1
-            print(f'Senha incorreta! Tentativas restantes: {cont}')
-            if cont == 0:
-                print('Muitos erros, você foi redirecionado para a página inicial.')
+            print(f"Senha incorreta! {cont} tentativas restantes.")
+            if cont == 0 or senha == '' or senha == '0':
+                print("Você foi redirecionado à página inicial.")
                 break
-    while r == 2:
-        funcoes.Cliente()
+    while r == "2":
+        Funcoes.Cliente()
         break
-    while r != 1 and r != 2:
-        r = int(input("Opção inválida. Tente novamente: "))
-    r = funcoes.TelaInicial()
-print('Volte sempre')
-
-
+    if r == "0":
+        break
 print("\nAté mais! Volte sempre!")
 
 # Ajeitar a função Listar
