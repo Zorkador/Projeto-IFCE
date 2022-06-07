@@ -73,32 +73,43 @@ def Remover(elementoRetirar):
 def Alterar(elementoAlterar):
     if len(lista) != 0:
         Funcoes.Listar()
-        elementoAlterar = input("Digite o item que deseja alterar: ").capitalize().strip()
-        
+        elementoAlterar = input("Informe o item que deseja alterar: ").capitalize().strip()
+        if elementoAlterar in lista.keys():
+            resp = input("1 - Preço\n2 - Quantidade\nO que deseja alterar? ")
+            while resp not in "12":
+                resp = input("Resposta inválida. Tente novamente:")
+            if resp == "1":
+                alteracao = float(input(f"Digite o novo preço do produto '{elementoAlterar}': R$"))
+            if resp == "2":
+                alteracao = int(input(f"Digite a nova quantidade do produto '{elementoAlterar}': "))
+                lista.update({elementoAlterar: alteracao})
 
 
 def Listar():
-    if len(lista) != 0:
+    print(lista)
+    '''if len(lista) != 0:
         Painel("Lista dos Produtos")
         print(("=-" * 30) + "=")
         for item, values in lista.items():
-            print(f"Produto: {item}. Preço: R${values[0]:.2f}. Quantidade: {values[1]}")
+            print(f"Produto: {item}. Preço: R${values[0]}. Quantidade: {values[1]}")
         print(("=-" * 30) + "=")
     else:
-        print("Não há nenhum item no estoque até o momento.")
+        print("Não há nenhum item no estoque até o momento.")'''
 
 
 def Acao():
     while True:
         Painel("Função ADM || Lojito del Tadeo")
-        acao = input("1 - Cadastrar\n2 - Remover\n3 - Listar\n0 - Sair\nO que deseja fazer? ").strip()
-        while acao not in "1230":
+        acao = input("1 - Cadastrar\n2 - Remover\n3 - Alterar\n4 - Listar\n0 - Sair\nO que deseja fazer? ").strip()
+        while acao not in "12340":
             acao = input("Resposta incorreta. Tente novamente: ")
         if acao == "1":
             Funcoes.Cadastrar("Item")
         if acao == "2":
             Funcoes.Remover("Item")
         if acao == "3":
+            Funcoes.Alterar("Item")
+        if acao == "4":
             Listar()
         if acao == "0":
             break
@@ -119,11 +130,6 @@ def Cliente():
             Funcoes.Encerrar()
         if acao == "0":
             break
-
-
-def Alterar(elementoRetirar):
-    Funcoes.Listar()
-    opcao = input("Informe o item que deseja alterar: ")
 
 
 def Comprar(produto, quantidade):
